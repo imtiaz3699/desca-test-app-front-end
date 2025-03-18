@@ -5,7 +5,7 @@ import { useUser } from "./userContext";
 const ApiContext = createContext();
 
 export const ApiProvider = ({ children }) => {
-    const {user,token} = useUser();
+    const {token} = useUser();
     const postRequest = async (url, data, isToken = false, customHeaders = {}) => {
         const baseUrl = import.meta.env.VITE_BASE_URL + url;
         try {

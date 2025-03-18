@@ -2,10 +2,45 @@ import React from "react";
 import Input from "../../components/Input/Input";
 import { MdDashboard } from "react-icons/md";
 import { useApi } from "../../context/apiFuncContext";
-
+import { useFormik } from "formik";
+import toast from "react-hot-toast";
+import Cookies from "js-cookie";
+import { useUser } from "../../context/userContext";
+import { useNavigate } from "react-router-dom";
 function Login() {
-    const {postRequest} = useApi()
-    
+  const { setUser, setToken } = useUser();
+  const { postRequest } = useApi();
+  const navigate = useNavigate()
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      try {
+        const response = await postRequest("/api/auth/login", values);
+        if (response?.status === 200) {
+          Cookies.set("token", response?.data?.token, {
+            expires: 7,
+            secure: true,
+          });
+          Cookies.set("user", JSON.stringify(response?.data?.user), {
+            expires: 7,
+            secure: true,
+          });
+          setUser(response?.data?.user);
+          setToken(response?.data?.token);
+          toast.success("Login Successful.");
+          navigate("/dashboard")
+        }
+      } catch (error) {
+        console.error(error?.response?.data?.message, "urlError");
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    },
+  });
   return (
     <div className="border-[1px] border-gray-300 rounded-[10px] shadow-md w-[400px] mx-auto">
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -17,13 +52,21 @@ function Login() {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
-            <Input label="Email" name="email" type="email" />
+          <form className="space-y-6" onSubmit={formik.handleSubmit}>
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+            />
             <Input
               label="Password"
-              name="email"
+              name="password"
               type="password"
               password={true}
+              value={formik.values.password}
+              onChange={formik.handleChange}
             />
 
             <div>

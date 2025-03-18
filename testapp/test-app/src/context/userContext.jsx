@@ -3,8 +3,8 @@ import Cookies from "js-cookie";
 
 const UserContext = createContext(null);
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(Cookies.get("token") ? JSON.parse(Cookies.get("user")) : null);
-  const [token, setToken] = useState(Cookies.get("user") ? JSON.parse(Cookies.get("token")) : null);
+  const [user, setUser] = useState(Cookies.get("token") ?? "");
+  const [token, setToken] = useState(Cookies.get("user") ? JSON.parse(Cookies.get("user")) : "");
 
 
   const logout = () => {
@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
     setUser(null);
     setToken(null);
   };
+  console.log(token,user,';afsdfkasdk')
   return (
     <UserContext.Provider value={{ user, token, logout }}>
       {children}
