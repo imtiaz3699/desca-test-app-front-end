@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { GoEye } from "react-icons/go";
 
-function Input({ label, name, type, onChange, value, placeholder, password }) {
+function Input({ label, name, type, onChange, value, placeholder, password,error }) {
   const [passwordType, setPasswordType] = useState(false);
   return (
     <div>
@@ -14,6 +14,7 @@ function Input({ label, name, type, onChange, value, placeholder, password }) {
         </label>
       </div>
       <div className="mt-2 relative">
+        <div>
         <input
           type={passwordType ? "text" : type}
           name={name}
@@ -22,6 +23,8 @@ function Input({ label, name, type, onChange, value, placeholder, password }) {
           value={value}
           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
         />
+        <p className = 'w-full text-red-500 text-start'>{error}</p>
+        </div>
         {password && (
           <div onClick={()=> setPasswordType(!passwordType)} className="absolute right-0 top-[30%] right-[5%] cursor-pointer hover:text-blue-500">
             <svg

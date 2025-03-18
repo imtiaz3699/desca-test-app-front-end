@@ -15,10 +15,13 @@ export const ApiProvider = ({ children }) => {
             ...customHeaders,
           };
           const response = await axios.post(baseUrl, data, { headers });
-          return response.data;
+          return response?.data || response;
         } catch (error) {
           console.error("Error:", error);
-          throw error;
+          if(error){
+            throw error;
+          }
+          
         }
       };
   

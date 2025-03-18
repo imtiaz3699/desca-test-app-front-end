@@ -16,10 +16,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route element={<ProtectedRoute />}>
-            <Route path="/dashboard" element={<UserManagement />}>
+            <Route path="/dashboard" element={<DashboardLayout />}>
+              <Route index element = {<UserManagement/>}/>
+
               {/* <Route index element={<Dashboard />} />
               <Route path="user" element={<UserPage />} />
               <Route path="product" element={<ProductPage />} /> */}
+              <Route path="product" element={<div>Feeling well</div>} />
             </Route>
           </Route>
           </Routes>

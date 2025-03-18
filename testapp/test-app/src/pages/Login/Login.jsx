@@ -7,23 +7,31 @@ import toast from "react-hot-toast";
 import Cookies from "js-cookie";
 import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 function Login() {
-  const { setUser, setToken } = useUser();
+  const { setUser, setToken,token } = useUser();
   const { postRequest } = useApi();
   const navigate = useNavigate()
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string().required("Password is required"),
+  });
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
+    validationSchema,
     onSubmit: async (values) => {
       try {
         const response = await postRequest("/api/auth/login", values);
-        if (response?.status === 200) {
+        if (response && response?.status == 200) {
           Cookies.set("token", response?.data?.token, {
             expires: 7,
             secure: true,
-          });
+          });         
           Cookies.set("user", JSON.stringify(response?.data?.user), {
             expires: 7,
             secure: true,
@@ -59,6 +67,7 @@ function Login() {
               type="email"
               value={formik.values.email}
               onChange={formik.handleChange}
+              error = {formik.touched.email && formik.errors.email}
             />
             <Input
               label="Password"
@@ -67,6 +76,7 @@ function Login() {
               password={true}
               value={formik.values.password}
               onChange={formik.handleChange}
+              error = {formik.touched.password && formik.errors.password}
             />
 
             <div>

@@ -1,30 +1,19 @@
 import { useState } from "react";
-import { Menu, Button } from "antd";
-import {
-  HomeOutlined,
-  UserOutlined,
-  SettingOutlined,
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { Menu } from "antd";
+import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
+import { MdOutlineLogout } from "react-icons/md";
+import { useUser } from "../../context/userContext";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
-
+  const {logout} = useUser();
   return (
-    <div className="flex h-screen">
+    <div className="h-screen">
       <div
-        className={`bg-gray-900 text-white p-4 ${
+        className={`bg-gray-900 text-white h-screen flex flex-col justify-between p-4 ${
           collapsed ? "w-16" : "w-60"
         } duration-300`}
       >
-        <Button
-          type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          className="mb-4 text-white"
-        />
-
         <Menu
           theme="dark"
           mode="inline"
@@ -41,10 +30,12 @@ const Sidebar = () => {
             Settings
           </Menu.Item>
         </Menu>
-      </div>
-
-      <div className="flex-1 p-6">
-        <h1 className="text-2xl font-bold">Main Content</h1>
+        <div onClick={logout} className="flex items-center gap-2 justify-center w-full group cursor-pointer">
+          <p className="text-[16px] font-bold group-hover:text-blue-500 ">
+            Logout
+          </p>
+          <MdOutlineLogout className="text-[20px] font-bold group-hover:text-blue-500" />
+        </div>
       </div>
     </div>
   );
