@@ -1,60 +1,69 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React,{useState} from "react";
+import { Popconfirm, Space, Table, Tag } from "antd";
+import { LiaEditSolid } from "react-icons/lia";
+import { MdOutlineDelete } from "react-icons/md";
+import toast from "react-hot-toast";
 
-const columns = [
+const UserManagement = ({ data, handleUpdate, handleDelete }) => {
+  const [open,setOpen] = useState(null);
+    const confirm = async (e) => {
+    const res = await handleDelete(e)
+    if(res?.status === 200) {
+        toast.success('User deleted successfully.')
+        setOpen(null);
+    }
+    
+  };
+  const cancel = (e) => {
+    console.log(e); 
+    setOpen(null);
+};
+  const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: 'Email',
-      dataIndex: 'email',
-      key: 'email',
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
     },
     {
-      title: 'Role',
-      dataIndex: 'role',
-      key: 'role',
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
-      title: 'Action',
-      key: 'action',
+      title: "Action",
+      key: "action",
       render: (_, record) => (
         <Space size="middle">
-        {console.log(record,'faldsfhlaskdj')}
-          <div onClick={()=> handleUpdate(record?.key)}>Edit</div>
-          <a>Delete</a>
-          <a>View</a>
+          <div className="cursor-pointer" onClick={() => handleUpdate(record)}>
+            <LiaEditSolid className="text-[24px]" />
+          </div>
+          <div
+            className="cursor-pointer"
+            
+          >
+            <Popconfirm
+              title="Delete the user"
+              description="Are you sure to delete this user?"
+              onConfirm={()=> confirm(record?.key)}
+              onCancel={cancel}
+              open={open === record?.key }
+              onOpenChange={()=> setOpen(record?.key)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <MdOutlineDelete className="text-[24px]" onClick={() => setOpen(record?.key)} />
+            </Popconfirm>
+          </div>
         </Space>
       ),
     },
   ];
-//   const data = [
-//     {
-//       key: '1',
-//       name: 'John Brown',
-//       email: 32,
-//       address: 'New York No. 1 Lake Park',
-//       tags: ['nice', 'developer'],
-//     },
-//     {
-//       key: '2',
-//       name: 'Jim Green',
-//       age: 42,
-//       address: 'London No. 1 Lake Park',
-//       tags: ['loser'],
-//     },
-//     {
-//       key: '3',
-//       name: 'Joe Black',
-//       age: 32,
-//       address: 'Sydney No. 1 Lake Park',
-//       tags: ['cool', 'teacher'],
-//     },
-//   ];
-const UserManagement = ({data}) => (
-<Table columns={columns} dataSource={data} />
-);
+  return <Table columns={columns} dataSource={data} />;
+};
 export default UserManagement;
