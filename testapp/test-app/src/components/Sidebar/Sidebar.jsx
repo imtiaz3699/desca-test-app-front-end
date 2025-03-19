@@ -3,23 +3,27 @@ import { Menu } from "antd";
 import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
 import { MdOutlineLogout } from "react-icons/md";
 import { useUser } from "../../context/userContext";
+import { useLocation } from "react-router-dom";
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(false);
   const {logout} = useUser();
+  const location = useLocation();
+  const menuKeyMap = {
+    "/dashboard": "1",
+    "/profile": "2",
+    "/settings": "3",
+  };
   return (
     <div className="h-screen">
       <div
-        className={`bg-gray-900 text-white h-screen flex flex-col justify-between p-4 ${
+        className={`bg-[#001529] text-white h-screen flex flex-col justify-between p-4 ${
           collapsed ? "w-16" : "w-60"
         } duration-300`}
       >
         <Menu
-          theme="dark"
-          mode="inline"
-          inlineCollapsed={collapsed}
-          className="bg-transparent text-white border-none"
-        >
+            selectedKeys={[menuKeyMap[location.pathname] || ""]}
+          theme="dark" mode="inline" inlineCollapsed={collapsed} className="bg-gray-900 text-white border-none">
           <Menu.Item key="1" icon={<HomeOutlined />}>
             Home
           </Menu.Item>

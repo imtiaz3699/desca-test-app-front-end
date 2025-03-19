@@ -14,9 +14,6 @@ const Navbar = () => {
     <nav className="bg-white shadow-md w-full">
       <div className="w-full flex items-center justify-between px-6 py-4">
         <div className="text-xl font-bold text-indigo-600">MyApp</div>
-        <div className="">
-          <Menu mode="horizontal" items={items} className="border-none" />
-        </div>
         <div onClick={logout}  className="hidden md:block">
           <Button type="primary">Logout</Button>
         </div>

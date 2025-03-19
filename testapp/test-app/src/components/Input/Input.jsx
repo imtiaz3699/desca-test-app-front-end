@@ -3,8 +3,8 @@ import { GoEye } from "react-icons/go";
 
 function Input({ label, name, type, onChange, value, placeholder, password,error }) {
   const [passwordType, setPasswordType] = useState(false);
-  return (
-    <div>
+  return  (
+    <div className = 'w-full'>
       <div className="flex items-center justify-between">
         <label
           for="password"
@@ -13,8 +13,8 @@ function Input({ label, name, type, onChange, value, placeholder, password,error
           {label}
         </label>
       </div>
-      <div className="mt-2 relative">
-        <div>
+      <div className="mt-2 relative w-full">
+        <div className = 'w-full'>
         <input
           type={passwordType ? "text" : type}
           name={name}
