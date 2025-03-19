@@ -4,7 +4,7 @@ import { LiaEditSolid } from "react-icons/lia";
 import { MdOutlineDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 
-function TaskManagementTable({ data, handleUpdate, handleDelete,user }) {
+function TaskManagementTable({ data, handleUpdate, handleDelete, user }) {
   const [open, setOpen] = useState(null);
   const confirm = async (e) => {
     const res = await handleDelete(e);
@@ -67,12 +67,12 @@ function TaskManagementTable({ data, handleUpdate, handleDelete,user }) {
     title: "Created By",
     dataIndex: "createdBy",
     key: "status",
+  };
+  const index = columns?.length - 1;
+  if (user?.role === "admin" || user?.role === "manager") {
+    columns.splice(index, 0, obj);
   }
-  const index = columns?.length -1;
-  if(user?.role === 'admin' || user?.role === 'manager') {
-    columns.splice(index,0,obj)
-  }
-  
+
   return <Table columns={columns} dataSource={data} />;
 }
 

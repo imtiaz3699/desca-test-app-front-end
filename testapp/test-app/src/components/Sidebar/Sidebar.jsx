@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Menu } from "antd";
-import { HomeOutlined, UserOutlined, SettingOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 import { MdOutlineLogout } from "react-icons/md";
 import { useUser } from "../../context/userContext";
 import { Link, useLocation } from "react-router-dom";

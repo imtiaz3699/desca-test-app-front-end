@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import { GoEye } from "react-icons/go";
 
-function Input({ label, name, type, onChange, value, placeholder, password,error }) {
+function Input({
+  label,
+  name,
+  type,
+  onChange,
+  value,
+  placeholder,
+  password,
+  error,
+}) {
   const [passwordType, setPasswordType] = useState(false);
-  return  (
-    <div className = 'w-full'>
+  return (
+    <div className="w-full">
       <div className="flex items-center justify-between">
         <label
           for="password"
@@ -14,19 +23,22 @@ function Input({ label, name, type, onChange, value, placeholder, password,error
         </label>
       </div>
       <div className="mt-2 relative w-full">
-        <div className = 'w-full'>
-        <input
-          type={passwordType ? "text" : type}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          value={value}
-          className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-        />
-        <p className = 'w-full text-red-500 text-start'>{error}</p>
+        <div className="w-full">
+          <input
+            type={passwordType ? "text" : type}
+            name={name}
+            placeholder={placeholder}
+            onChange={onChange}
+            value={value}
+            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+          />
+          <p className="w-full text-red-500 text-start">{error}</p>
         </div>
         {password && (
-          <div onClick={()=> setPasswordType(!passwordType)} className="absolute right-0 top-[30%] right-[5%] cursor-pointer hover:text-blue-500">
+          <div
+            onClick={() => setPasswordType(!passwordType)}
+            className="absolute right-0 top-[30%] right-[5%] cursor-pointer hover:text-blue-500"
+          >
             <svg
               className="shrink-0 size-3.5"
               width="24"

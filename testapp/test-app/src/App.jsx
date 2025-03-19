@@ -23,9 +23,6 @@ function App() {
               <Route index element = {<UserManagement/>}/>
               <Route path = "tasks" element={<Tasks />} />
               <Route path = "manager/tasks" element={<ManagerTasks />} />
-              {/* <Route index element={<Dashboard />} />
-              <Route path="user" element={<UserPage />} />
-              <Route path="product" element={<ProductPage />} /> */}
               <Route path="product" element={<div>Feeling well</div>} />
             </Route>
           </Route>

@@ -14,7 +14,6 @@ function ManagerTasks() {
   const { user } = useUser();
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
   const [status, setStatus] = useState("");
   const [dates, setDates] = useState({
     startDate: null,
@@ -31,7 +30,6 @@ function ManagerTasks() {
       if (res?.status === 200) {
         setData(res?.data);
       }
-      console.log(res, "fasdlkfhalsdkhflaksdhflaskd");
     } catch (e) {
       console.log(e);
     }

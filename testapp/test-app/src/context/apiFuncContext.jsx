@@ -78,7 +78,7 @@ export const ApiProvider = ({ children }) => {
       return response?.data || response;
     } catch (error) {
       console.error("DELETE Request Error:", error.response?.data || error.message);
-      throw error; // Properly rethrow error for handling at the calling function
+      throw error; 
     }
   };
   return (

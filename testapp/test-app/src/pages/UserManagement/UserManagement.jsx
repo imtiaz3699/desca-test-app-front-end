@@ -26,7 +26,7 @@ function UserManagement() {
   const [userId, setUserId] = useState("");
   const [managers, setManagers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
-  const [selectedManager,setSelectedManager] = useState('');
+  const [selectedManager, setSelectedManager] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const fetchLists = async () => {
     try {
@@ -34,7 +34,7 @@ function UserManagement() {
       if (response?.status === 200) {
         setData(response?.data);
         const mang = response?.data
-          ?.filter((element) => element?.role === "manager") // ✅ Remove non-managers first
+          ?.filter((element) => element?.role === "manager")
           ?.map((element) => ({
             value: element?._id,
             label: element?.name,
@@ -126,11 +126,11 @@ function UserManagement() {
   const handleAssignManager = async (obj) => {
     try {
       const res = await postRequest(`/api/admin/assign-manager`, obj, true);
-      if(res?.status === 200) {
+      if (res?.status === 200) {
         fetchLists();
         setModalOpen(false);
-        setSelectedUser('');
-        setSelectedManager('');
+        setSelectedUser("");
+        setSelectedManager("");
       }
     } catch (e) {
       console.log(e);
@@ -138,16 +138,13 @@ function UserManagement() {
   };
   const handleChange = (id) => {
     setSelectedManager(id);
-  }
+  };
   const handleSelectUser = (id) => {
-    if(id) {
+    if (id) {
       setModalOpen(true);
       setSelectedUser(id);
     }
-  }
-  
-  console.log(data,'alsdkjhflasdhflaksdj')
-  console.log(managers, "fasdlkfjahdslkfhasldManagers");
+  };
   return (
     <div className="flex flex-col px-5 w-full">
       <PageHeader
@@ -196,18 +193,31 @@ function UserManagement() {
               defaultValue="pending"
               className="!w-full"
               name="status"
-              value={selectedManager  || ""}
+              value={selectedManager || ""}
               style={{ width: "100%", height: "35px" }}
               onChange={handleChange}
               options={managers}
             />
           </div>
-          <div className = 'flex flex-row items-end justify-end w-full gap-5 mt-4'>
+          <div className="flex flex-row items-end justify-end w-full gap-5 mt-4">
             <Button
-            onClick={()=> handleAssignManager({userId: selectedUser, managerId: selectedManager})}
-            type="primary"
-            >Submit</Button>
-            <Button color = "red" variant="outlined" onClick={() => setModalOpen(false)} >Cancel</Button>
+              onClick={() =>
+                handleAssignManager({
+                  userId: selectedUser,
+                  managerId: selectedManager,
+                })
+              }
+              type="primary"
+            >
+              Submit
+            </Button>
+            <Button
+              color="red"
+              variant="outlined"
+              onClick={() => setModalOpen(false)}
+            >
+              Cancel
+            </Button>
           </div>
         </div>
       </Modal>

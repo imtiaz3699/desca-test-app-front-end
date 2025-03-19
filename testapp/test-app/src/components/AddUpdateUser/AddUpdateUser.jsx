@@ -1,9 +1,8 @@
 import React from "react";
 import Input from "../Input/Input";
 import { Button, Select } from "antd";
-function AddUpdateUser({ formik,handleCancel }) {
+function AddUpdateUser({ formik, handleCancel }) {
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
     formik.setFieldValue("role", value);
   };
   return (
@@ -47,7 +46,6 @@ function AddUpdateUser({ formik,handleCancel }) {
               </label>
               <Select
                 defaultValue="lucy"
-
                 className="!w-full"
                 value={formik.values.role}
                 style={{ width: "100%", height: "35px" }}
@@ -65,7 +63,12 @@ function AddUpdateUser({ formik,handleCancel }) {
           <Button htmlType="submit" type="primary">
             Submit
           </Button>
-          <Button onClick={handleCancel} htmlType="button" variant="solid" color="red">
+          <Button
+            onClick={handleCancel}
+            htmlType="button"
+            variant="solid"
+            color="red"
+          >
             Cancel
           </Button>
         </div>

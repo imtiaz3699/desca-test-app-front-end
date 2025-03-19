@@ -21,12 +21,10 @@ const UserManagement = ({
       setOpen(null);
     }
   };
-  console.log(data, "fadslfkashdl");
   const cancel = (e) => {
     console.log(e);
     setOpen(null);
   };
-  console.log(user, "fadslfkjalsdf34367468");
   const columns = [
     {
       title: "Name",

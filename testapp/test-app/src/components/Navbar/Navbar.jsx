@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useUser } from "../../context/userContext";
 
 const Navbar = () => {
-  const {logout} = useUser();
+  const { logout } = useUser();
   const items = [
     { key: "1", label: <Link to="/dashboard">Home</Link> },
     { key: "2", label: <Link to="/task-management">Task</Link> },
@@ -14,7 +14,7 @@ const Navbar = () => {
     <nav className="bg-white shadow-md w-full">
       <div className="w-full flex items-center justify-between px-6 py-4">
         <div className="text-xl font-bold text-indigo-600">MyApp</div>
-        <div onClick={logout}  className="hidden md:block">
+        <div onClick={logout} className="hidden md:block">
           <Button type="primary">Logout</Button>
         </div>
       </div>

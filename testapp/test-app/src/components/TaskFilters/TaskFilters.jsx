@@ -10,15 +10,13 @@ function TaskFilters({ status, setStatus, dueDate, setDueDate, setDates }) {
     if (values) {
       if (values && values.length === 2) {
         setDates({
-          startDate: values[0]?.toDate().toISOString(), // Convert Day.js object to ISO
+          startDate: values[0]?.toDate().toISOString(), 
           endDate: values[1]?.toDate().toISOString(),
         });
       } else {
         setDates({ startDate: null, endDate: null });
       }
-      const formattedDates = values.map((date) => date?.toDate().toISOString()); // Convert to ISO format
-      console.log("Formatted Dates:", formattedDates);
-
+      const formattedDates = values.map((date) => date?.toDate().toISOString()); 
       setDueDate(values);
     } else {
       setDueDate([null, null]);

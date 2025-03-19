@@ -9,9 +9,9 @@ import { useUser } from "../../context/userContext";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 function Login() {
-  const { setUser, setToken,token } = useUser();
+  const { setUser, setToken, token } = useUser();
   const { postRequest } = useApi();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .email("Invalid email address")
@@ -31,7 +31,7 @@ function Login() {
           Cookies.set("token", response?.data?.token, {
             expires: 7,
             secure: true,
-          });         
+          });
           Cookies.set("user", JSON.stringify(response?.data?.user), {
             expires: 7,
             secure: true,
@@ -39,14 +39,13 @@ function Login() {
           setUser(response?.data?.user);
           setToken(response?.data?.token);
           toast.success("Login Successful.");
-          if(response?.data?.user?.role === 'admin') {
-            navigate("/dashboard")
-          } else if(response?.data?.user?.role === 'user'){
-            navigate("/dashboard/tasks")
+          if (response?.data?.user?.role === "admin") {
+            navigate("/dashboard");
+          } else if (response?.data?.user?.role === "user") {
+            navigate("/dashboard/tasks");
           } else {
-            navigate("/dashboard")
+            navigate("/dashboard");
           }
-          
         }
       } catch (error) {
         console.error(error?.response?.data?.message, "urlError");
@@ -74,7 +73,7 @@ function Login() {
               type="email"
               value={formik.values.email}
               onChange={formik.handleChange}
-              error = {formik.touched.email && formik.errors.email}
+              error={formik.touched.email && formik.errors.email}
             />
             <Input
               label="Password"
@@ -83,7 +82,7 @@ function Login() {
               password={true}
               value={formik.values.password}
               onChange={formik.handleChange}
-              error = {formik.touched.password && formik.errors.password}
+              error={formik.touched.password && formik.errors.password}
             />
 
             <div>

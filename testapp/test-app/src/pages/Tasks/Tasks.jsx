@@ -33,7 +33,6 @@ function Tasks() {
       console.log(e);
     }
   };
-  console.log(dueDate[0], "afhsldkjfhalsdhfalj");
   const formik = useFormik({
     initialValues: {
       title: "",
@@ -108,7 +107,6 @@ function Tasks() {
     formik.setFieldValue("title", id?.title);
     formik.setFieldValue("description", id?.description);
     formik.setFieldValue("status", id?.status);
-    console.log(id, "fadlfajsdlfhasdkl");
     formik.setFieldValue(
       "due_date",
       id?.due_date ? dayjs(id?.due_date) : dayjs(new Date())
@@ -119,7 +117,6 @@ function Tasks() {
     formik.resetForm();
     setUserId("");
   };
-  console.log(status, dueDate, "fasdlfjashdlkfj");
   return (
     <div className="flex flex-col px-5 w-full">
       <PageHeader
