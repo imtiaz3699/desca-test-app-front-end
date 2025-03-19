@@ -5,7 +5,7 @@ function PageHeader({ heading, btnText, setIsModalOpen, isModalOpen, user,manage
   return (
     <div className="flex flex-row items-center justify-between w-full mt-10">
       <h1 className="font-bold text-[30px]">{heading}</h1>
-      {(user?.role === "admin") && (
+      {/* {(user?.role === "admin") && (
         <div
           onClick={() => setIsModalOpen(!isModalOpen)}
           className="flex flex-row items-center gap-2 cursor-pointer"
@@ -13,7 +13,7 @@ function PageHeader({ heading, btnText, setIsModalOpen, isModalOpen, user,manage
           <p className="text-[20px]">{btnText}</p>
           <FiPlusCircle className="text-[20px]" />
         </div>
-      )}
+      )} */}
       {(user?.role === "user") && (
         <div
           onClick={() => setIsModalOpen(!isModalOpen)}
