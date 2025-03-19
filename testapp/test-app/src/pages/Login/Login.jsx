@@ -39,7 +39,14 @@ function Login() {
           setUser(response?.data?.user);
           setToken(response?.data?.token);
           toast.success("Login Successful.");
-          navigate("/dashboard")
+          if(response?.data?.user?.role === 'admin') {
+            navigate("/dashboard")
+          } else if(response?.data?.user?.role === 'user'){
+            navigate("/dashboard/tasks")
+          } else {
+            navigate("/dashboard")
+          }
+          
         }
       } catch (error) {
         console.error(error?.response?.data?.message, "urlError");

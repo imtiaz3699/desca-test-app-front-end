@@ -7,6 +7,9 @@ import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./components/ProtectedRoutes/ProtectedRoutes";
 import DashboardLayout from "./pages/dashboard/dashboardLayout";
 import UserManagement from "./pages/UserManagement/UserManagement";
+import Tasks from "./pages/Tasks/Tasks";
+import ManagerTasks from "./pages/ManagerTasks/ManagerTasks";
+
 function App() {
   return (
     <>
@@ -18,7 +21,8 @@ function App() {
             <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<DashboardLayout />}>
               <Route index element = {<UserManagement/>}/>
-
+              <Route path = "tasks" element={<Tasks />} />
+              <Route path = "manager/tasks" element={<ManagerTasks />} />
               {/* <Route index element={<Dashboard />} />
               <Route path="user" element={<UserPage />} />
               <Route path="product" element={<ProductPage />} /> */}

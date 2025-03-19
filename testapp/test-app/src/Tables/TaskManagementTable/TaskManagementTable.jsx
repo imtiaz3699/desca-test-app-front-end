@@ -1,74 +1,47 @@
 import React, { useState } from "react";
-import { Popconfirm, Space, Table, Tag, Tooltip } from "antd";
+import { Table, Popconfirm, Space } from "antd";
 import { LiaEditSolid } from "react-icons/lia";
 import { MdOutlineDelete } from "react-icons/md";
 import toast from "react-hot-toast";
-import { GrUserManager } from "react-icons/gr";
-import { FcManager } from "react-icons/fc";
 
-const UserManagement = ({
-  data,
-  handleUpdate,
-  handleDelete,
-  user,
-  handleSelectUser,
-}) => {
+function TaskManagementTable({ data, handleUpdate, handleDelete,user }) {
   const [open, setOpen] = useState(null);
   const confirm = async (e) => {
     const res = await handleDelete(e);
     if (res?.status === 200) {
-      toast.success("User deleted successfully.");
+      toast.success("Task deleted successfully.");
       setOpen(null);
     }
   };
-  console.log(data, "fadslfkashdl");
   const cancel = (e) => {
     console.log(e);
     setOpen(null);
   };
-  console.log(user, "fadslfkjalsdf34367468");
   const columns = [
     {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
+      title: "Title",
+      dataIndex: "title",
+      key: "title",
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
+      title: "Description",
+      dataIndex: "description",
+      key: "description",
     },
     {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
     },
-  ];
-  if (user.role === "admin") {
-    columns.push({
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
-        <Space size="middle " className="flex items-center gap-2">
-          {record?.role === "user" && (
-            <div className="cursor-pointer">
-              {record?.manager?._id ? (
-                <Tooltip placement="topLeft" title={record?.manager?.name}>
-                  <FcManager className="text-[20px]" />
-                </Tooltip>
-              ) : (
-                <GrUserManager
-                  onClick={() => handleSelectUser(record?.key)}
-                  className="text-[20px]"
-                />
-              )}
-            </div>
-          )}
+        <Space size="middle">
           <div className="cursor-pointer" onClick={() => handleUpdate(record)}>
             <LiaEditSolid className="text-[24px]" />
           </div>
-
           <div className="cursor-pointer">
             <Popconfirm
               title="Delete the user"
@@ -88,8 +61,19 @@ const UserManagement = ({
           </div>
         </Space>
       ),
-    });
+    },
+  ];
+  const obj = {
+    title: "Created By",
+    dataIndex: "createdBy",
+    key: "status",
   }
+  const index = columns?.length -1;
+  if(user?.role === 'admin' || user?.role === 'manager') {
+    columns.splice(index,0,obj)
+  }
+  
   return <Table columns={columns} dataSource={data} />;
-};
-export default UserManagement;
+}
+
+export default TaskManagementTable;
